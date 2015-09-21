@@ -27,6 +27,7 @@ class UsersController < ApplicationController
   def destroy
     user = User.find(params[:id])
     user.destroy
+    STATSD.increment "user.deleted"
     redirect_to users_path, :notice => "User deleted."
   end
 
